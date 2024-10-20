@@ -11,7 +11,7 @@ public class MainActivity extends AppCompatActivity {
     private double value1 = Double.NaN; // Stores first operand
     private double value2 = Double.NaN; // Stores second operand
     private char currentAction; // Stores current operation
-    private final char ADDITION = '+'; // Constants for operations
+    private final char ADDITION = '+';
     private final char SUBTRACTION = '-';
     private final char MULTIPLICATION = '*';
     private final char DIVISION = '/';
@@ -55,30 +55,30 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.btnEquals).setOnClickListener(v -> {
             if (currentAction != EQUALS) {
                 value2 = Double.parseDouble(display.getText().toString());
-                performOperation(); // Perform the operation before showing result
-                display.setText(String.valueOf(value1)); // Show the result
-                value1 = Double.NaN; // Reset value1 for new calculations
+                performOperation();
+                display.setText(String.valueOf(value1));
+                value1 = Double.NaN;
             }
         });
 
-        // Sign Change
+
         findViewById(R.id.btnSignChange).setOnClickListener(v -> toggleSign());
 
-        // Backspace
+
         findViewById(R.id.btnBackspace).setOnClickListener(v -> backspace());
     }
 
     private void handleOperation(char action) {
-        // Only proceed if the display has a valid number
+
         if (display.getText().length() != 0) {
             if (!Double.isNaN(value1)) {
                 value2 = Double.parseDouble(display.getText().toString());
-                performOperation(); // Perform the previous operation
+                performOperation();
             } else {
-                value1 = Double.parseDouble(display.getText().toString()); // Set value1
+                value1 = Double.parseDouble(display.getText().toString());
             }
-            currentAction = action; // Set current action
-            display.setText(""); // Clear display for next input
+            currentAction = action;
+            display.setText("");
         }
     }
 
@@ -95,42 +95,42 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case DIVISION:
                 if (value2 != 0) {
-                    value1 = value1 / value2; // Prevent division by zero
+                    value1 = value1 / value2;
                 } else {
-                    display.setText("Error"); // Handle division by zero
+                    display.setText("Error");
                     clear();
                     return;
                 }
                 break;
         }
-        value2 = Double.NaN; // Reset value2 for next calculation
+        value2 = Double.NaN;
     }
 
     private void handleSquareRoot() {
         if (display.getText().length() != 0) {
             double value = Double.parseDouble(display.getText().toString());
-            display.setText(String.valueOf(Math.sqrt(value))); // Show square root
+            display.setText(String.valueOf(Math.sqrt(value)));
         }
     }
 
     private void clear() {
-        display.setText(""); // Clear display
-        value1 = Double.NaN; // Reset value1
-        value2 = Double.NaN; // Reset value2
+        display.setText("");
+        value1 = Double.NaN;
+        value2 = Double.NaN;
     }
 
     private void toggleSign() {
         if (display.getText().length() != 0) {
             double value = Double.parseDouble(display.getText().toString());
-            value = value * -1; // Change sign
-            display.setText(String.valueOf(value)); // Show new value
+            value = value * -1;
+            display.setText(String.valueOf(value));
         }
     }
 
     private void backspace() {
         String text = display.getText().toString();
         if (!text.isEmpty()) {
-            display.setText(text.substring(0, text.length() - 1)); // Remove last character
+            display.setText(text.substring(0, text.length() - 1));
         }
     }
 }
